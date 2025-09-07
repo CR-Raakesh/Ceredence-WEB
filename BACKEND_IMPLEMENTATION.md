@@ -25,7 +25,7 @@ const handleConnectWallet = () => {
 \`\`\`
 
 #### Smart Contract Functions Needed:
-```clarity
+\`\`\`clarity
 ;; Core promise management functions
 (define-public (create-promise (title (string-ascii 100)) (category (string-ascii 20)) (deadline uint) (stake uint)))
 (define-public (fulfill-promise (promise-id uint)))
