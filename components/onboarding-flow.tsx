@@ -19,6 +19,7 @@ interface OnboardingFlowProps {
 interface UserProfile {
   name: string
   email: string
+  company: string
   department: string
   role: "Technical" | "Non-Technical" | ""
   bio: string
@@ -29,6 +30,7 @@ export function OnboardingFlow({ walletAddress, onComplete }: OnboardingFlowProp
   const [profile, setProfile] = useState<UserProfile>({
     name: "",
     email: "",
+    company: "",
     department: "",
     role: "",
     bio: "",
@@ -171,6 +173,16 @@ export function OnboardingFlow({ walletAddress, onComplete }: OnboardingFlowProp
                   </div>
                 </div>
 
+                <div className="space-y-2">
+                  <Label htmlFor="company">Current Company *</Label>
+                  <Input
+                    id="company"
+                    value={profile.company}
+                    onChange={(e) => setProfile({ ...profile, company: e.target.value })}
+                    placeholder="Acme Corp, TechStart Inc, etc."
+                  />
+                </div>
+
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="department">Department</Label>
@@ -211,7 +223,7 @@ export function OnboardingFlow({ walletAddress, onComplete }: OnboardingFlowProp
 
                 <Button
                   onClick={handleNext}
-                  disabled={!profile.name || !profile.email || !profile.role}
+                  disabled={!profile.name || !profile.email || !profile.company || !profile.role}
                   className="w-full bg-blue-600 hover:bg-blue-700"
                 >
                   Continue
@@ -243,6 +255,9 @@ export function OnboardingFlow({ walletAddress, onComplete }: OnboardingFlowProp
                     </div>
                     <div>
                       <span className="font-medium">Email:</span> {profile.email}
+                    </div>
+                    <div>
+                      <span className="font-medium">Company:</span> {profile.company}
                     </div>
                     <div>
                       <span className="font-medium">Department:</span> {profile.department || "Not specified"}
