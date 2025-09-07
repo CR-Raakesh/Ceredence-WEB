@@ -64,12 +64,11 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4">
+    <div className="min-h-screen bg-background">
+      <header className="bg-card shadow-sm border-b border-border sticky top-0 z-10">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-4">
               <Image
                 src="/images/credence-logo.png"
                 alt="Credence Logo"
@@ -78,18 +77,18 @@ export default function DashboardPage() {
                 className="rounded-lg"
               />
               <div>
-                <span className="text-xl font-bold text-gray-900">Credence</span>
-                <div className="text-sm text-gray-500">Welcome back, {mockUserData.name}</div>
+                <h1 className="text-xl font-bold text-foreground">Credence</h1>
+                <p className="text-sm text-muted-foreground">Welcome back, {mockUserData.name}</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm">
+            <div className="flex items-center space-x-3">
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
                 <Bell className="w-4 h-4" />
               </Button>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
                 <Settings className="w-4 h-4" />
               </Button>
-              <div className="flex items-center space-x-2 text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded-lg">
+              <div className="flex items-center space-x-2 text-sm text-muted-foreground bg-muted px-3 py-2 rounded-lg">
                 <User className="w-4 h-4" />
                 <span className="font-mono">{mockUserData.address.slice(0, 8)}...</span>
               </div>
@@ -102,7 +101,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8 space-y-8">
+      <main className="container mx-auto px-6 py-8 space-y-8">
         {/* Promise Score Section */}
         <PromiseScoreChart
           score={mockUserData.promiseScore}
@@ -113,26 +112,25 @@ export default function DashboardPage() {
           brokenPromises={mockUserData.brokenPromises}
         />
 
-        {/* Quick Actions */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link href="/create-promise" className="flex-1">
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 py-6 text-lg shadow-lg hover:shadow-xl transition-all">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Link href="/create-promise" className="group">
+            <Button className="w-full h-16 text-base font-medium bg-primary hover:bg-primary/90 shadow-sm hover:shadow-md transition-all group-hover:scale-[1.02]">
               <Plus className="w-5 h-5 mr-2" />
               Create New Promise
             </Button>
           </Link>
-          <Link href="/history" className="flex-1">
+          <Link href="/history" className="group">
             <Button
               variant="outline"
-              className="w-full py-6 text-lg border-2 hover:bg-gray-50 transition-all bg-transparent"
+              className="w-full h-16 text-base font-medium border-border hover:bg-accent hover:text-accent-foreground transition-all group-hover:scale-[1.02] bg-transparent"
             >
               View Promise History
             </Button>
           </Link>
-          <Link href="/profile" className="flex-1">
+          <Link href="/profile" className="group">
             <Button
               variant="outline"
-              className="w-full py-6 text-lg border-2 hover:bg-gray-50 transition-all bg-transparent"
+              className="w-full h-16 text-base font-medium border-border hover:bg-accent hover:text-accent-foreground transition-all group-hover:scale-[1.02] bg-transparent"
             >
               Export Profile
             </Button>

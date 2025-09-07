@@ -50,7 +50,7 @@ export default function LandingPage() {
                 Connect Wallet & Start
               </Button>
             </Link>
-            <Link href="/hr">
+            <Link href="/hr/login">
               <Button size="lg" variant="outline" className="px-8 bg-transparent">
                 HR Dashboard
               </Button>

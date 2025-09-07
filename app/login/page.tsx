@@ -15,6 +15,7 @@ export default function LoginPage() {
   const router = useRouter()
 
   const handleWalletConnect = (address: string) => {
+    console.log("[v0] Employee wallet connected:", address)
     setWalletAddress(address)
 
     // TODO: BACKEND - Check if user profile exists
@@ -22,20 +23,34 @@ export default function LoginPage() {
     // If profile exists, redirect to dashboard
     // If new user, show onboarding flow
 
-    // For demo, assume new user needs onboarding
-    const isNewUser = Math.random() > 0.3 // 70% chance of being new user for demo
+    const isNewUser = !localStorage.getItem(`user_profile_${address}`)
 
     if (isNewUser) {
+      console.log("[v0] New user detected, showing onboarding")
       setShowOnboarding(true)
     } else {
+      console.log("[v0] Existing user, redirecting to dashboard")
       // Existing user, go directly to dashboard
       router.push("/dashboard")
     }
   }
 
   const handleOnboardingComplete = () => {
+    console.log("[v0] Onboarding completed for:", walletAddress)
     // TODO: BACKEND - Store user session/authentication state
     // BACKEND: Save authentication state, user profile, initial $PROM credits
+
+    if (walletAddress) {
+      localStorage.setItem(
+        `user_profile_${walletAddress}`,
+        JSON.stringify({
+          address: walletAddress,
+          createdAt: new Date().toISOString(),
+          hasCompletedOnboarding: true,
+        }),
+      )
+    }
+
     router.push("/dashboard")
   }
 
@@ -68,6 +83,13 @@ export default function LoginPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             <WalletConnection onConnect={handleWalletConnect} />
+
+            <div className="text-center">
+              <p className="text-sm text-muted-foreground mb-2">HR Personnel?</p>
+              <Link href="/hr/login" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                Access HR Dashboard →
+              </Link>
+            </div>
 
             <div className="border-t pt-4">
               <p className="text-xs text-gray-400 text-center">
